@@ -1,0 +1,23 @@
+cc = tcc
+ninja = ninja
+cflags = -O2 -Wall -Wextra
+ldflags = -ltcc
+
+builddir = build
+bindir = .
+depdir = ../deps
+tccdir = $depdir/tinycc
+ninjadir = $depdir/ninja
+
+rule cc
+  command = $cc $cflags -c $in -o $out
+  description = CC $out
+
+rule link
+  command = $cc $ldflags -o $out $in 
+  description = LINK $out
+
+build $builddir/spm.o: cc spm.c
+build $bindir/spm: link $builddir/spm.o
+
+default $bindir/spm
