@@ -1,3 +1,5 @@
 .tup/
-*.o
+deps/
+src/*.a
 src/spm
+src/*.o
