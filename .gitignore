@@ -1,4 +1,5 @@
 .tup/
+.spm/
 deps/
 src/*.a
 src/spm
