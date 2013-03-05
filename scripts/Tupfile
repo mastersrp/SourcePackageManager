@@ -1,1 +1,1 @@
-: ../src/spm |> ./addpayload.sh |> spm.sh
+: ../src/spm ../deps/tinycc/tcc ../deps/tup/tup |> ./addpayload.sh |> spm.sh
