@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function untar_payload {
+	match=$(grep --text --line-number '^PAYLOAD:$' $0 | cut -d ':' -f 1)
+	payload_start=$((match + 1))
+	tail -n +$payload_start $0 | tar -xzf -
+}
+
+if [[ ! -d ".paklib" || ! -e "spm" ]]; then
+	untar_payload
+fi
+
+./.spm/spm $@
+exit $?
