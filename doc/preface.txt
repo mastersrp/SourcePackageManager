@@ -1,0 +1,38 @@
+Chapter 0: Preface
+==================
+
+In the world of technology, today, there's nearly nothing that cannot be done.
+Limits are constantly exceeding. With the possibilities being almost endless,
+it's important that we not only keep those possibilities, but continue to
+excell in every area possible.
+One of those areas that haven't particularily been known to be moving forward
+at great speeds are general package managers. The only type of package
+managers that seem to be moving forwards in these days of age are
+language-specific package managers, such as RubyGems and NPM (NodeJS Package
+Manager).
+RubyGems has a certain feature known as user-specific package repositories.
+This means that any installed "gem" from RubyGem can be placed in either the
+system partition, or in the current users home directory folder, in a
+directory called '.gem/'.
+NPM has per-project installation of packages, and as such each project is
+(almost) completely self-contained without the need of system packages.
+
+Both of these solutions are great solutions, and solve the problems they look
+to. But why not both? Why not have per-system, per-user, AND per-project
+package managerment in one out-of-the-box solution, and for a general package
+manager instead of language-specific installations?
+
+The problem I was faced with was that developing software solutions on a
+system where you're the only person is no problem. You just install the
+package in the system directories /usr/lib, /usr/bin, and wherever else it
+need be. This is NOT a solution when you're on a multi-user system without
+root access, or permission to install software.
+Then you have to go the same way as on Windows systems, and that is to find
+the software manually, compile it yourself and seek to somehow set up a
+configuration that works for your single setup.
+Another solution would be a bootstrap script doing these things for you, but
+you're still left with some weird hacks and workarounds, since the package
+manager won't allow you to just fetch the packages into your user account
+directory.
+
+With these things in mind, continue on to the next chapter...
