@@ -3,3 +3,4 @@ deps/
 src/*.a
 src/spm
 src/*.o
+script/spm.sh
