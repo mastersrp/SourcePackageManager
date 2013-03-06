@@ -3,7 +3,7 @@ AR = ar rcu
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
-CFLAGS += -O2
+CFLAGS += -Os
 CFLAGS += -Wno-unused
 CFLAGS += -I../deps/tinycc/include
 CFLAGS += -I../deps/lua/src
