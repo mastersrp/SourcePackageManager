@@ -6,39 +6,11 @@ REPO=file://${HOME}/work/tuprepo
 # Parameters for getpack are (category)/(package) (base_package_name) (tag/branch)
 # Note that remote tags can be fetched running
 # `git ls-remote --tags (remote_url)`
-function updateall {
-	for DEPS in $(find deps/ -maxdepth 1 -mindepth 1 -type d); do
-		REMOTE=$(cat .spm/deps | cut -d " " -f 1)/$(cat .spm/deps | cut -d " " -f 2).build;
-		LOCAL=deps/$(cat .spm/deps | cut -d " " -f 3);
-		REVISION=$(cat .spm/deps | cut -d " " -f 4);
-		LOCAL_HASH=$(cat .spm/deps | cut -d " " -f 5);
-		REMOTE_HASH=$(git ls-remote --heads ${REMOTE} | grep ${REVISION})
-		REMOTE_HASH=${REMOTE_HASH:0:40}
-		if [[ $REMOTE_HASH == $LOCAL_HASH ]]; then
-			printf "$DEPS is up to date!\n";
-		else
-			printf "$DEPS is out of date! Updating...\n";
-			cd ${CWD}/$LOCAL;
-			git reset --hard HEAD;
-			cd ${CWD};
-			git clone $REMOTE ${CWD}/$LOCAL --single-branch --branch $REVISION | tee .spm/log -a;
-			cp -Rf ${LOCAL}.build/* ${LOCAL}/;
-			rm -Rf ${LOCAL}.build;
-		fi
-	done
-}
 function getpack {
 	git clone ${REPO}/${1}.build ${CWD}/deps/${2}.build --single-branch --branch ${3} | tee .spm/log -a;
-	REVISION_HASH=$(git ls-remote --heads ${REPO}/${1}.build | grep ${3})
-	printf "$REVISION_HASH\n";
-	REVISION_HASH=${REVISION_HASH:0:40}
-	printf "$REVISION_HASH\n";
-	git clone ${REPO}/${1} ${CWD}deps/${2} --single-branch --branch ${3} | tee .spm/log -a;
-	cp -Rf deps/${2}.build/* deps/${2};
-	rm -Rf deps/${2}.build/;
-	if [[ ! -e ".spm/deps" || $(cat .spm/deps | grep ${1}) == "" ]]; then
-		echo "${REPO} ${1} ${2} ${3} ${REVISION_HASH}" >> .spm/deps
-	fi
+	git clone ${REPO}/${1} ${CWD}/deps/${2} --single-branch --branch ${3} | tee .spm/log -a;
+	cp -Rf ${CWD}/deps/${2}.build/* ${CWD}/deps/${2};
+	rm -Rf ${CWD}/deps/${2}.build/;
 }
 if [ ! -d "deps/lua" ]; then
 	printf "Fetching dev-lang/lua v5.2.1 from repos...\n" | tee .spm/log -a;
@@ -61,7 +33,6 @@ fi
 #	printf "Fetching dev-libs/libgit2 v0.17.0 from upstream...\n" | tee .spm/log -a;
 #	getpack dev-libs/libgit2 libgit2 v0.17.0
 #fi
-updateall
 TUP=$(which tup);
 if [ ! -e $TUP ]; then
 	printf "Building tup...\n" | tee .spm/log -a;
