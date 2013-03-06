@@ -17,6 +17,9 @@ function updateall {
 			printf "$DEPS is up to date!\n";
 		else
 			printf "$DEPS is out of date! Updating...\n";
+			cd $LOCAL;
+			git reset --hard HEAD
+			cd ../..;
 			git clone $REMOTE $LOCAL --single-branch --branch $REVISION | tee .spm/log -a
 			cp -Rf ${LOCAL}.build/* ${LOCAL}/;
 			rm -Rf ${LOCAL}.build
