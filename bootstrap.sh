@@ -1,5 +1,6 @@
 #!/bin/bash
-mkdir -p .spm/
+CWD=$(pwd -P)
+mkdir -p ${CWD}/.spm/
 REPO=file://${HOME}/work/tuprepo
 
 # Parameters for getpack are (category)/(package) (base_package_name) (tag/branch)
@@ -17,22 +18,22 @@ function updateall {
 			printf "$DEPS is up to date!\n";
 		else
 			printf "$DEPS is out of date! Updating...\n";
-			cd $LOCAL;
-			git reset --hard HEAD
-			cd ../..;
-			git clone $REMOTE $LOCAL --single-branch --branch $REVISION | tee .spm/log -a
+			cd ${CWD}/$LOCAL;
+			git reset --hard HEAD;
+			cd ${CWD};
+			git clone $REMOTE ${CWD}/$LOCAL --single-branch --branch $REVISION | tee .spm/log -a;
 			cp -Rf ${LOCAL}.build/* ${LOCAL}/;
-			rm -Rf ${LOCAL}.build
+			rm -Rf ${LOCAL}.build;
 		fi
 	done
 }
 function getpack {
-	git clone ${REPO}/${1}.build deps/${2}.build --single-branch --branch ${3} | tee .spm/log -a;
+	git clone ${REPO}/${1}.build ${CWD}/deps/${2}.build --single-branch --branch ${3} | tee .spm/log -a;
 	REVISION_HASH=$(git ls-remote --heads ${REPO}/${1}.build | grep ${3})
 	printf "$REVISION_HASH\n";
 	REVISION_HASH=${REVISION_HASH:0:40}
 	printf "$REVISION_HASH\n";
-	git clone ${REPO}/${1} deps/${2} --single-branch --branch ${3} | tee .spm/log -a;
+	git clone ${REPO}/${1} ${CWD}deps/${2} --single-branch --branch ${3} | tee .spm/log -a;
 	cp -Rf deps/${2}.build/* deps/${2};
 	rm -Rf deps/${2}.build/;
 	if [[ ! -e ".spm/deps" || $(cat .spm/deps | grep ${1}) == "" ]]; then
@@ -51,6 +52,10 @@ if [ ! -d "deps/tup" ]; then
 	printf "Fetching dev-util/tup v0.6 from upstream...\n" | tee .spm/log -a;
 	git clone git://github.com/gittup/tup.git deps/tup --single-branch --branch v0.6 | tee .spm/log -a;
 fi
+if [ ! -d "deps/musl" ]; then
+	printf "Fetching sys-libs/musl v0.9.9 from repos...\n" | tee .spm/log -a;
+	getpack sys-libs/musl musl v0.9.9;
+fi
 # Commented out for internal testing and review
 #if [ ! -d "deps/libgit2" ]; then
 #	printf "Fetching dev-libs/libgit2 v0.17.0 from upstream...\n" | tee .spm/log -a;
@@ -60,10 +65,10 @@ updateall
 TUP=$(which tup);
 if [ ! -e $TUP ]; then
 	printf "Building tup...\n" | tee .spm/log -a;
-	cd deps/tup;
+	cd ${CWD}/deps/tup;
 	./bootstrap.sh;
-	cp -Rf {.tup,tup} ../../
-	cd ../..;
+	cp -Rf {.tup,tup} ${CWD};
+	cd ${CWD};
 	TUP=${PWD}/tup;
 	rm -Rf;
 fi
