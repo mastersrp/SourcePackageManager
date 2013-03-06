@@ -4,6 +4,7 @@
 mkdir -p .spm/
 cp -f ../src/spm .spm/spm
 cp -f ../deps/tinycc/tcc .spm/tcc
+cp -Rf ../deps/tinycc/include .spm/paklib/
 cp -f ../deps/tup/tup .spm/tup
 cp -Rf ../paklib/ .spm/paklib/
 tar -czf spm.tgz .spm/
