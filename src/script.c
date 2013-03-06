@@ -2,15 +2,15 @@
 
 lua_State *vm;
 
-int script_init() {
+int spm_script_init() {
 	vm = luaL_newstate();
 }
-int script_openlibs() {
+int spm_script_openlibs() {
 	luaL_openlibs(vm);
 }
-int script_dostring( const char *str ) {
+int spm_script_dostring( const char *str ) {
 	luaL_dostring(vm,str);
 }
-int script_deinit() {
+int spm_script_deinit() {
 	lua_close(vm);
 }
