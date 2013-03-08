@@ -3,7 +3,7 @@
 #include "script.h"
 
 const char *hello_from_lua = "io.output():write('Hello world, lua calling!\\n')";
-const char *tcc_run = "os.execute('.spm/tcc -nostdinc -B.spm/paklib/include -run .spm/paklib/hello_world.c')";
+const char *tcc_run = "os.execute('tcc -I.spm/paklib/include -L.spm/paklib -lspm -nostdinc -B.spm/paklib/include -run .spm/paklib/hello_world.c')";
 
 int main( int argc, char **argv ) {
 	printf( "Hello world\n" );
