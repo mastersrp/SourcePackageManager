@@ -6,9 +6,9 @@ function untar_payload {
 	tail -n +$payload_start $0 | tar -xzf -
 }
 
-if [[ ! -d ".paklib" || ! -e "spm" ]]; then
+if [[ ! -d ".spm/paklib" || ! -e ".spm/bin/spm" ]]; then
 	untar_payload
 fi
 
-./.spm/spm $@
+./.spm/bin/spm $@
 exit $?
