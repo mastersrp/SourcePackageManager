@@ -49,6 +49,8 @@ if [ ! -e $TUP ]; then
 	TUP=${PWD}/tup;
 	rm -Rf;
 fi
+echo $(pwd -P)
+cd ${CWD}
 if [ ! -d ".tup" ]; then
 	$TUP init;
 fi
