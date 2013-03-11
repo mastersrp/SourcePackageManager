@@ -10,5 +10,5 @@ if [[ ! -d ".spm/paklib" || ! -e ".spm/bin/spm" ]]; then
 	untar_payload
 fi
 
-./.spm/bin/spm $@
+PATH=$(pwd -P)/.spm/bin ./.spm/bin/spm $@
 exit $?

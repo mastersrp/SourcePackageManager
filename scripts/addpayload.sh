@@ -3,8 +3,9 @@
 # Ensure that .spm/ exists before trying to write to it.
 mkdir -p .spm/paklib/include/spm
 mkdir -p .spm/bin
+mkdir -p .spm/paklib/lib
 cp -f ../src/spm .spm/bin/spm
-cp -f ../src/libspm.a .spm/paklib/
+cp -f ../src/libspm.a .spm/paklib/lib/
 cp -f ../deps/tinycc/tcc .spm/bin/tcc
 cp -f ../deps/tinycc/lib/libtcc1.a .spm/paklib/include/
 cp -Rf ../deps/tinycc/include/* .spm/paklib/include/
