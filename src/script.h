@@ -8,6 +8,7 @@
 int spm_script_init();
 int spm_script_openlibs();
 int spm_script_dostring( const char *str );
+int spm_script_dofile( const char *file );
 int spm_script_deinit();
 
 #endif /* SPM_SCRIPT_H */

@@ -10,13 +10,10 @@ CFLAGS += -I../deps/lua/src
 LDFLAGS += -L../deps/tinycc
 LDFLAGS += -L../deps/lua/src
 LDFLAGS += -L.
-LDFLAGS += -ltcc
+LDFLAGS += -ldl
+LDFLAGS += -lm
 LDFLAGS += -llua
 LDFLAGS += -lspm
-LDFLAGS += -ltcc
-TCCFLAGS += -B../deps/tinycc
-TCCFLAGS += -nostdinc
-TCCLDFLAGS += -nostdlib
 
 ifeq (@(TUP_ARCH),i386)
 	CFLAGS += -m32
