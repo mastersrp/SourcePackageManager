@@ -2,6 +2,9 @@
 CWD=$(pwd -P)
 mkdir -p ${CWD}/.spm/
 REPO=file://${HOME}/work/tuprepo
+if [[ ! -d ${REPO:7} ]]; then
+	REPO="http://dl.dropbox.com/u/5579836/tuprepo"
+fi
 
 # Parameters for getpack are (category)/(package) (base_package_name) (tag/branch)
 # Note that remote tags can be fetched running
