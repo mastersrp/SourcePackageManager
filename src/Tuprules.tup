@@ -19,6 +19,10 @@ ifeq (@(TUP_ARCH),i386)
 	CFLAGS += -m32
 	LDFLAGS += -m32
 endif
+ifeq (@(TUP_ARCH),x86_64)
+	CFLAGS += -m64
+	LDFLAGS += -m64
+endif
 
 !cc = |> ^ CC %f^ $(CC) $(CFLAGS) -c %f -o %o |> %B.o
 !ld = |> ^ LINK %o^ $(CC) $(LDFLAGS) %f -o %o |>

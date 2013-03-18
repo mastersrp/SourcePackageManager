@@ -10,6 +10,7 @@ int spm_log( const char *msg, int split_output ) {
 	spm_log_file = fopen( spm_log_filename, "a" );
 	if( spm_log_file == NULL ) { return 1; }
 	fprintf(spm_log_file, msg);
+	fflush(spm_log_file);
 	fclose(spm_log_file);
 	return 0;
 }
