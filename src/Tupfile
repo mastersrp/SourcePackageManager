@@ -1,5 +1,5 @@
 include_rules
 
 : foreach *.c | *.h |> !cc |>
-: package.o log.o |> !ar |> libspm.a
-: script.o spm.o libspm.a ../deps/lua/src/liblua.a ../deps/tinycc/libtcc.a |> !ld |> spm
+: log.o |> !ar |> libspm.a
+: options.o script.o spm.o libspm.a ../deps/lua/src/liblua.a ../deps/tinycc/libtcc.a |> !ld |> spm
