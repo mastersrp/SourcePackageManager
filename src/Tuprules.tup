@@ -1,18 +1,17 @@
-CC = tcc
-AR = ar rcu
+CC = @(CC)
+AR = @(AR)
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Os
 CFLAGS += -Wno-unused
-CFLAGS += -I../deps/tinycc/include
-CFLAGS += -I../deps/lua/src
-LDFLAGS += -L../deps/tinycc
-LDFLAGS += -L../deps/lua/src
-LDFLAGS += -L.
-LDFLAGS += -ldl
-LDFLAGS += -lm
-LDFLAGS += -llua
+CFLAGS += -I@(DIR_TINYCC_INC)
+CFLAGS += -I@(DIR_LUA_INC)
+LDFLAGS += -L@(DIR_TINYCC_LIB)
+LDFLAGS += -L@(DIR_LUA_LIB)
+LDFLAGS += -L$(TUP_CWD)
+LDFLAGS += @(LIB_LUA)
+LDFLAGS += @(LIB_TINYCC)
 LDFLAGS += -lspm
 
 ifeq (@(TUP_ARCH),i386)
@@ -22,6 +21,11 @@ endif
 ifeq (@(TUP_ARCH),x86_64)
 	CFLAGS += -m64
 	LDFLAGS += -m64
+endif
+ifeq (@(DEBUG),y)
+	CFLAGS += -D_DEBUG_
+	CFLAGS += -g
+	LDFLAGS += -g
 endif
 
 !cc = |> ^ CC %f^ $(CC) $(CFLAGS) -c %f -o %o |> %B.o
