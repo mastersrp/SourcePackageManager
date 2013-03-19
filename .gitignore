@@ -3,9 +3,9 @@
 .spm/paklib/
 .spm/bin/
 deps/
-debug/
+debug/*
 !debug/tup.config
-release/
+release/*
 !release/tup.config
 src/*.a
 src/spm
