@@ -3,10 +3,8 @@
 .spm/paklib/
 .spm/bin/
 deps/
-debug/*
-!debug/tup.config
-release/*
-!release/tup.config
+build/*
+!build/tup.config
 src/*.a
 src/spm
 src/*.o

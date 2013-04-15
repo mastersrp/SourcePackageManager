@@ -10,10 +10,11 @@
 	const int SPM_SCRIPT_DEBUG = 0;
 #endif
 
-int spm_script_init();
-int spm_script_openlibs();
-int spm_script_dostring( const char *str );
-int spm_script_dofile( const char *file );
-int spm_script_deinit();
+lua_State *spm_script_init();
+int spm_script_openlibs( lua_State *vm );
+int spm_script_sendargs( lua_State *vm, int argc, char *argv[] );
+int spm_script_dostring( lua_State *vm, const char *str );
+int spm_script_dofile( lua_State *vm, const char *file );
+int spm_script_deinit( lua_State *vm );
 
 #endif /* SPM_SCRIPT_H */
