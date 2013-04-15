@@ -4,7 +4,9 @@
 .spm/bin/
 deps/
 !build/tup.config
-build/
+build/src/
+build/scripts/
+build/deps/
 src/*.a
 src/spm
 src/*.o
