@@ -3,7 +3,7 @@
 function untar_payload {
 	match=$(grep --text --line-number '^PAYLOAD:$' $0 | cut -d ':' -f 1)
 	payload_start=$((match + 1))
-	tail -n +$payload_start $0 | tar -xjf -
+	tail -n +$payload_start $0 | base64 -d | tar -xjf -
 }
 
 if [[ ! -d ".spm/paklib" || ! -e ".spm/bin/spm" ]]; then

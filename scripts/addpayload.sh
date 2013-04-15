@@ -13,14 +13,19 @@ cp -f ../deps/tinycc/lib/libtcc1.a .spm/paklib/include/
 cp -Rf ../deps/tinycc/include/* .spm/paklib/include/
 cp -f ../src/{spm,log}.h .spm/paklib/include/spm/
 cp -f ../deps/tup/tup .spm/bin/tup
-cp -Rf ../paklib/ .spm/
+cp -Rf ../paklib/* .spm/paklib/
+
+# Compile .moon files to .lua
+for MOON in $(find .spm/paklib -type f -iname '*.moon'); do
+	moonc $MOON;
+done
 
 # Archive .spm into spm.tgz and add the payload to the shell script
 tar -cf spm.tar .spm/
 bzip2 -9 spm.tar
 cp -f spm.sh.in spm.sh
 echo "PAYLOAD:" >> spm.sh
-cat spm.tar.bz2 >> spm.sh
+base64 spm.tar.bz2 >> spm.sh
 
 # Remember to clean up after ourselves
 rm -Rf spm.tar.bz2 .spm/
