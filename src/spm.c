@@ -11,7 +11,7 @@ int main( int argc, char **argv ) {
 		return 1;
 	}
 	spm_script_openlibs( vm );
-	spm_script_sendargs( vm, argc, argv );
+	//spm_script_sendargs( vm, argc, argv );
 	spm_script_dofile( vm, ".spm/paklib/main.lua" );
 	spm_script_deinit( vm );
 	return 0;
