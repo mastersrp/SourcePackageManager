@@ -32,7 +32,9 @@ int spm_script_dostring( lua_State *vm, const char *str ) {
 	return spm_script_error(vm,err);
 }
 int spm_script_dofile( lua_State *vm, const char *file ) {
-	int err = luaL_dofile(vm,file);
+	int err = luaL_loadfile(vm,file);
+	if( err ) { return spm_script_error(vm,err); }
+	err = lua_pcall(vm,0,LUA_MULTRET,0);
 	return spm_script_error(vm,err);
 }
 int spm_script_deinit( lua_State *vm ) {

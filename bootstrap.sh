@@ -15,6 +15,7 @@ function getpack {
 	cp -Rf ${CWD}/deps/${2}.build/* ${CWD}/deps/${2};
 	rm -Rf ${CWD}/deps/${2}.build/;
 }
+
 if [ ! -d "deps/lua" ]; then
 	printf "Fetching dev-lang/lua v5.2.1 from repos...\n" | tee .spm/log -a;
 	getpack dev-lang/lua lua v5.2.1;
