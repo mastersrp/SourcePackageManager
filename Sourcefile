@@ -1,4 +1,18 @@
+require 'io'
+
 deps = {}
 
-deps["lua"] = ["mastersrp/lua"]
-deps["tup"] = ["gittup/tup"]
+deps["lua"] = {
+				url="mastersrp/lua",
+				configure=function( root )
+								io.open(root .. '/src/build.sh','w'):write('#!/bin/bash\nmake linux\nrm -rf *.o')
+								io.open(root .. '/src/Tupfile','w'):write(': |> bash build.sh |> lua luac liblua.a')
+				end
+}
+deps["tup"] = {
+				url="gittup/tup",
+				configure=function( root )
+				end
+}
+
+-- vim: filetype=lua
