@@ -8,8 +8,6 @@ mkdir -p .spm/paklib/lib
 # Copy the required files into .spm
 printf " * Creating .spm archive ...";
 cp -f ../src/spm .spm/bin/spm
-cp -f ../src/libspm.a .spm/paklib/lib/
-cp -f ../src/{spm,log}.h .spm/paklib/include/spm/
 cp -f ../deps/tup/tup .spm/bin/tup
 cp -Rf ../paklib/* .spm/paklib/
 printf "[DONE]\n";
