@@ -1,6 +1,6 @@
 #include "script.h"
 
-int spm_script_error(vm,err) {
+int spm_script_error( lua_State *vm, int err) {
 	if( err ) {
 		fprintf(stderr,"lua: %s\n", lua_tostring(vm,-1) );
 		return err;
