@@ -5,7 +5,3 @@
 deps/
 bin/
 build/
-src/*.a
-src/spm
-src/*.o
-scripts/spm.sh
