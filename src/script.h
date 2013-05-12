@@ -5,9 +5,9 @@
 #include <lualib.h>
 #define SPM_SCRIPT_FUNCTION(name) int name(lua_State *vm)
 #ifdef _DEBUG_
-	const int SPM_SCRIPT_DEBUG = 1;
+	#define SPM_SCRIPT_DEBUG 1
 #else
-	const int SPM_SCRIPT_DEBUG = 0;
+	#define SPM_SCRIPT_DEBUG 0
 #endif
 
 lua_State *spm_script_init();

@@ -2,4 +2,4 @@ include_rules
 
 : foreach *.c | *.h |> !cc |>
 : log.o |> !ar |> libspm.a
-: options.o script.o spm.o libspm.a ../deps/lua/src/liblua.a ../deps/tinycc/libtcc.a |> !ld |> spm
+: options.o script.o spm.o libspm.a ../deps/lua/src/liblua.a |> !ld |> spm

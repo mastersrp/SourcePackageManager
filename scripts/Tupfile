@@ -1,1 +1,1 @@
-: ../src/spm ../deps/tinycc/tcc ../deps/tinycc/lib/libtcc1.a ../deps/tup/tup ../paklib/hello_world.c ../paklib/main.moon ../paklib/log.moon |> ./addpayload.sh |> spm.sh
+: ../src/spm ../deps/tup/tup ../paklib/main.lua ../paklib/log.lua |> ./addpayload.sh |> spm.sh
