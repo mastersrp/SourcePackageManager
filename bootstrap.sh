@@ -8,7 +8,9 @@ which lua &>/dev/null
 lua_installed=$?
 
 if [[ "$lua_installed" == "0" ]]; then
-	printf "" > build/tup.config
+	if [[ ! -s "build/tup.config" ]]; then
+		printf "" > build/tup.config
+	fi
 	lua scripts/getdeps.lua
 	[[ ! "$?" == "0" ]] && exit 1
 else
