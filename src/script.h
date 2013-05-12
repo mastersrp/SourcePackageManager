@@ -17,4 +17,6 @@ int spm_script_dostring( lua_State *vm, const char *str );
 int spm_script_dofile( lua_State *vm, const char *file );
 int spm_script_deinit( lua_State *vm );
 
+int SPM_SCRIPT_LIBRARY_ADD_FUNCTION( lua_State *vm, const char *lib, int function, const char *function_name );
+
 #endif /* SPM_SCRIPT_H */
