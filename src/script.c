@@ -48,4 +48,5 @@ int SPM_SCRIPT_LIBRARY_FUNCTION_ADD( lua_State *vm, const char *lib, int functio
 	lua_pushstring(vm,function_name);
 	lua_pushcfunction(vm,function);
 	lua_rawset(vm,-3);
+	return 0;
 }
