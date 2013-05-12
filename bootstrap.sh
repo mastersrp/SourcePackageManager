@@ -21,11 +21,6 @@ if [ ! -d "deps/lua" ]; then
 	getpack dev-lang/lua lua v5.2.1;
 fi
 
-if [ ! -d "deps/tinycc" ]; then
-	printf "Fetching dev-lang/tinycc release_0_9_26 from repos...\n" | tee .spm/log -a;
-	getpack dev-lang/tinycc tinycc release_0_9_26;
-fi
-
 if [ ! -d "deps/tup" ]; then
 	printf "Fetching dev-util/tup v0.6 from upstream...\n" | tee .spm/log -a;
 	git clone git://github.com/gittup/tup.git deps/tup --single-branch --branch v0.6 | tee .spm/log -a;
@@ -43,15 +38,18 @@ fi
 #	getpack dev-libs/libgit2 libgit2 v0.17.0
 #fi
 
+export PATH=${CWD}:$PATH
+
 TUP=$(which tup);
-if [ ! -e $TUP ]; then
+if [[ ! -e "$TUP" ]]; then
 	printf "Building tup...\n" | tee .spm/log -a;
 	cd ${CWD}/deps/tup;
 	./bootstrap.sh;
-	cp -Rf {.tup,tup} ${CWD};
+	cp -vf {.tup,tup} ${CWD};
+	rm -vf {.tup,tup};
+	for m in $(find . -iname '*.o' -or -iname '*.a'); do rm -rvf $m; done
 	cd ${CWD};
 	TUP=${PWD}/tup;
-	rm -Rf;
 fi
 cd ${CWD}
 if [ ! -d ".tup" ]; then
