@@ -40,4 +40,7 @@ if [ ! -d ".tup" ]; then
 fi
 $TUP upd;
 
-[[ "$?" == "0" ]] && ln -sf build/scripts/spm.sh bin/spm
+if [[ "$?" == "0" ]]; then
+	cp -vfu build/scripts/spm.sh bin/spm
+	echo "export PATH=$(pwd -P)/bin:\$PATH" > scripts/spm
+fi
