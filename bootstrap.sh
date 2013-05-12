@@ -2,6 +2,7 @@
 CWD=$(pwd -P)
 install -d ${CWD}/.spm/
 install -d ${CWD}/build
+install -d ${CWD}/bin
 
 which lua &>/dev/null
 lua_installed=$?
