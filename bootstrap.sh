@@ -56,3 +56,5 @@ if [ ! -d ".tup" ]; then
 	$TUP init;
 fi
 $TUP upd;
+
+[[ "$?" == "0" ]] && ln -sf build/scripts/spm.sh bin/spm

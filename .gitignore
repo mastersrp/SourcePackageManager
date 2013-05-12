@@ -3,6 +3,7 @@
 .spm/paklib/
 .spm/bin/
 deps/
+bin/
 !build/tup.config
 build/src/
 build/scripts/
