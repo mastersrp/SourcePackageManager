@@ -1,1 +1,1 @@
-local spm_deps = dofile( '.spm/deps' )
+local spm_deps = dofile( 'Sourcefile' )
