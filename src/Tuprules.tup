@@ -9,6 +9,7 @@ CFLAGS += -Wno-unused
 CFLAGS += -I@(DIR_LUA_ROOT)/src
 LDFLAGS += -L@(DIR_LUA_ROOT)/src
 LDFLAGS += -lm -llua -ldl
+LDFLAGS += -Wl,--as-needed
 
 ifeq (@(CC),)
 	CC = gcc

@@ -17,8 +17,8 @@ deps["tup"] = {
 deps["libgit2"] = {
 	url="libgit2/libgit2",
 	configure=function( root )
-		io.open(root .. '/build.sh','w'):write('#!/bin/bash\ncmake . -G "Unix Makefiles"\nmake\nfor file in $(find . -iname "*.o"); do rm -rf $file; done\nrm -rf CMakeCache.txt CMakeFiles/ cmake_install.cmake Makefile tests-clar/clar.suite\n')
-		io.open(root .. '/Tupfile','w'):write(': |> bash build.sh |> libgit2.so libgit2.so.0.18.0 libgit2.pc')
+		io.open(root .. '/build.sh','w'):write('#!/bin/bash\ncmake . -G "Unix Makefiles"\nmake\nfor file in $(find . -iname "*.o"); do rm -rf $file; done\nrm -rf CMakeCache.txt CMakeFiles/ cmake_install.cmake Makefile tests-clar/clar.suite CTestTestfile.cmake tests-clar/.clarcache libgit2_clar\n')
+		io.open(root .. '/Tupfile','w'):write(': |> bash build.sh |> libgit2.so libgit2.so.0 libgit2.so.0.18.0 libgit2.pc')
 	end
 }
 
