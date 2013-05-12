@@ -42,7 +42,7 @@ int spm_script_deinit( lua_State *vm ) {
 	return 0;
 }
 
-int SPM_SCRIPT_LIBRARY_FUNCTION_ADD( lua_State *vm, const char *lib, int function, const char *function_name ) {
+int SPM_SCRIPT_LIBRARY_ADD_FUNCTION( lua_State *vm, const char *lib, int function, const char *function_name ) {
 	lua_getglobal(vm,lib);
 	lua_gettable(vm,-1);
 	lua_pushstring(vm,function_name);
