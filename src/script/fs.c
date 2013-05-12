@@ -4,7 +4,6 @@
 #include <dirent.h>
 
 SPM_SCRIPT_FUNCTION( io_dopen ) {
-	SPM_SCRIPT_LIBRARY_ADD_FUNCTION(vm,"io",io_dopen,"dopen");
 	int top = lua_gettop(vm);
 	DIR *dp;
 	const char *dir = lua_tostring(vm,-1);
@@ -18,7 +17,6 @@ SPM_SCRIPT_FUNCTION( io_dopen ) {
 }
 
 SPM_SCRIPT_FUNCTION( io_dclose ) {
-	SPM_SCRIPT_LIBRARY_ADD_FUNCTION(vm,"io",io_dclose,"dclose");
 	int top = lua_gettop(vm);
 	DIR *dp;
 	dp = lua_touserdata(vm,-1);

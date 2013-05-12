@@ -13,7 +13,6 @@ LDFLAGS += -L@(DIR_LUA_LIB)
 LDFLAGS += -L$(TUP_CWD)
 LDFLAGS += @(LIB_LUA)
 LDFLAGS += @(LIB_TINYCC)
-LDFLAGS += -lspm
 
 ifeq (@(CC),)
 	CC = gcc
