@@ -1,3 +1,4 @@
 deps = {}
 
 deps["lua"] = ["mastersrp/lua"]
+deps["tup"] = ["gittup/tup"]
