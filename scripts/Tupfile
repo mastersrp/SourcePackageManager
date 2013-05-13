@@ -1,1 +1,3 @@
+ifeq (@(BUILD_TYPE),standalone)
 : ../src/spm ../deps/tup/tup ../paklib/main.lua ../paklib/log.lua |> ./addpayload.sh |> spm.sh
+endif
