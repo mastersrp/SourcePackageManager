@@ -44,6 +44,6 @@ fi
 $TUP upd;
 
 if [[ "$?" == "0" ]]; then
-	cp -vfu build/scripts/spm.sh bin/spm
+	[[ -s "build/scripts/spm.sh" ]] && cp -vfu build/scripts/spm.sh bin/spm
 	echo "export PATH=$(pwd -P)/bin:\$PATH" > scripts/spm
 fi

@@ -22,4 +22,14 @@ deps["libgit2"] = {
 	end
 }
 
+pkg = {}
+
+pkg["spm"] = {
+	configure=function()
+	end,
+	build=function()
+		os.execute( "./bootstrap.sh" )
+	end
+}
+
 -- vim: filetype=lua
