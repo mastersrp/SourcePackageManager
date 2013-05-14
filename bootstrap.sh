@@ -22,6 +22,7 @@ if [[ ! -s "build/tup.config" ]]; then
 	echo "CONFIG_DEBUG=n" >> build/tup.config
 	echo "CONFIG_CC=gcc" >> build/tup.config
 	echo "CONFIG_AR=ar rcu" >> build/tup.config
+	echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
 fi
 
 export PATH=${CWD}:$PATH
