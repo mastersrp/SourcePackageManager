@@ -3,7 +3,7 @@
 #include <lua.h>
 #include <lauxlib.h>
 #include <lualib.h>
-#define SPM_SCRIPT_FUNCTION(name) int name(lua_State *vm)
+#define SPM_SCRIPT_FUNCTION(name) static int name(lua_State *vm)
 #ifdef _DEBUG_
 	#define SPM_SCRIPT_DEBUG 1
 #else

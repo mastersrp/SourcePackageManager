@@ -3,7 +3,7 @@
 #include "../script.h"
 
 SPM_SCRIPT_FUNCTION( io_dopen );
-
+SPM_SCRIPT_FUNCTION( io_dread );
 SPM_SCRIPT_FUNCTION( io_dclose );
 
 #endif /* SPM_FILESYSTEM_H */
