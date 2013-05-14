@@ -16,6 +16,23 @@ SPM_SCRIPT_FUNCTION( io_dopen ) {
 	}
 }
 
+SPM_SCRIPT_FUNCTION( io_dread ) {
+	int top = lua_gettop(vm);
+	DIR *dp;
+	dp = lua_touserdata(vm,-1);
+	if( dp != NULL ) {
+		lua_newtable(vm);
+		struct dirent *ep;
+		while( ep = readdir(dp) ) {
+			lua_pushnumber(vm,-1);
+			lua_pushstring(vm, ep->d_name);
+			lua_rawset(vm,-3);
+		}
+	} else {
+		return 0;
+	}
+}
+
 SPM_SCRIPT_FUNCTION( io_dclose ) {
 	int top = lua_gettop(vm);
 	DIR *dp;
