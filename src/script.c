@@ -14,11 +14,11 @@ lua_State *spm_script_init() {
 	return vm;
 }
 int spm_script_sendargs( lua_State *vm, int argc, char *argv[] ) {
-	lua_createtable(vm,argc,0);
-	int top = lua_gettop( vm );
+	lua_newtable(vm);
 	for( int i=0; i<argc; i++ ) {
-		lua_pushstring( vm, argv[i] );
-		lua_settable( vm, top );
+		lua_pushnumber(vm,i);
+		lua_pushstring(vm,argv[i]);
+		lua_rawset(vm,-3);
 	}
 	lua_setglobal( vm, "ARGS" );
 	return 0;
