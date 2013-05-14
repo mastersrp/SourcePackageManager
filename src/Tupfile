@@ -2,4 +2,4 @@ include_rules
 
 : foreach *.c | *.h |> !cc |>
 : log.o |> !ar |> libspm.a
-: script/fs.o script.o options.o spm.o log.o ../@(DIR_LUA_ROOT)/src/liblua.a ../@(DIR_LIBGIT2_ROOT)/libgit2.so |> !ld |> spm
+: script/fs.o script.o options.o spm.o log.o ../@(DIR_LUA_ROOT)/src/liblua.a ../@(DIR_LIBGIT2_ROOT)/libgit2.a |> !ld |> spm
