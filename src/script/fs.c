@@ -1,4 +1,5 @@
 #include "fs.h"
+#include "../fs.h"
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
