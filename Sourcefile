@@ -22,6 +22,13 @@ deps["libgit2"] = {
 	end
 }
 
+deps["dht"] = {
+	url="jech/dht",
+	configure=function( root )
+		io.open(root .. '/Tupfile','w'):write('include_rules\n: foreach *.c | *.h |> !cc |>\n: dht.o |> !ar |> libdht.a\n')
+	end
+}
+
 pkg = {}
 
 pkg["spm"] = {
