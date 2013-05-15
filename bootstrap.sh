@@ -1,4 +1,8 @@
 #!/bin/bash
+
+for arg in $@; do
+	[[ "$arg" == "-v" || "$arg" == "--verbose" ]] && verbose=true
+done
 CWD=$(pwd -P)
 install -d ${CWD}/.spm/
 install -d ${CWD}/build
@@ -40,7 +44,11 @@ cd ${CWD}
 if [ ! -d ".tup" ]; then
 	$TUP init;
 fi
-$TUP upd;
+if [[ "$verbose" ]]; then
+	$TUP upd --verbose;
+else
+	$TUP upd;
+fi
 
 if [[ "$?" == "0" ]]; then
 	[[ -s "build/scripts/spm.sh" ]] && cp -vfu build/scripts/spm.sh bin/spm
