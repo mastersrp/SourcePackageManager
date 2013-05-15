@@ -1,3 +1,3 @@
 include_rules
 
-: foreach *.c | *.h |> !cc |>
+: foreach *.c | *.h ../@(DIR_LIBGIT2_ROOT)/src/*.h |> !cc |>
