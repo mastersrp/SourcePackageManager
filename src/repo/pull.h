@@ -1,5 +1,5 @@
-#ifndef SPM_PULL_H
-#define SPM_PULL_H
+#ifndef SPM_REPO_PULL_H
+#define SPM_REPO_PULL_H
 
 
-#endif /* SPM_PULL_H */
+#endif /* SPM_REPO_PULL_H */
