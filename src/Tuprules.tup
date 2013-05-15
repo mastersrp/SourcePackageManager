@@ -8,9 +8,11 @@ CFLAGS += -Os
 CFLAGS += -Wno-unused
 CFLAGS += -I../@(DIR_LUA_ROOT)/src
 CFLAGS += -I../@(DIR_LIBGIT2_ROOT)/src
+CFLAGS += -I../@(DIR_DHT_ROOT)/
 LDFLAGS += -L../@(DIR_LUA_ROOT)/src
 LDFLAGS += -L../@(DIR_LIBGIT2_ROOT)
-LDFLAGS += -lm -llua -ldl -lgit2
+LDFLAGS += L../@(DIR_DHT_ROOT)/
+LDFLAGS += -lm -llua -ldl -lgit2 -ldht
 LDFLAGS += -Wl,--as-needed
 
 ifeq (@(CC),)
