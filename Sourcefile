@@ -25,7 +25,7 @@ deps["libgit2"] = {
 deps["dht"] = {
 	url="jech/dht",
 	configure=function( root )
-		io.open(root .. '/Tupfile','w'):write('!cc = |> ^ CC %f^ gcc -g -Wall -lcrypt -c %f -o %o |> %B.o\n!ar = |> ^ AR %o^ ar rcu &o %f |>\n: foreach *.c | *.h |> !cc |>\n: dht.o |> !ar |> libdht.a\n')
+		io.open(root .. '/Tupfile','w'):write('!cc = |> ^ CC %f^ gcc -g -Wall -lcrypt -c %f -o %o |> %B.o\n!ar = |> ^ AR %o^ ar rcu &o %f |>\n: foreach dht.c | dht.h |> !cc |>\n: dht.o |> !ar |> libdht.a\n')
 	end
 }
 

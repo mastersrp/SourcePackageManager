@@ -8,7 +8,7 @@ which lua &>/dev/null
 lua_installed=$?
 
 if [[ "$lua_installed" == "0" ]]; then
-	lua scripts/getdeps.lua clone
+	lua scripts/getdeps.lua pull
 	[[ ! "$?" == "0" ]] && exit 1
 else
 	printf "[!] You'll need lua installed to compile this project!\n"
