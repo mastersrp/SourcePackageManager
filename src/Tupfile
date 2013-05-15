@@ -1,5 +1,5 @@
 include_rules
 
 : foreach *.c | *.h |> !cc |>
-: pull.o log.o |> !ar |> libspm.a
+: fs.o log.o |> !ar |> libspm.a
 : script/fs.o script.o options.o spm.o log.o ../@(DIR_LUA_ROOT)/src/liblua.a ../@(DIR_LIBGIT2_ROOT)/libgit2.a |> !ld |> spm
