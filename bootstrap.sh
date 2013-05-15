@@ -8,22 +8,20 @@ which lua &>/dev/null
 lua_installed=$?
 
 if [[ "$lua_installed" == "0" ]]; then
-	if [[ ! -s "build/tup.config" ]]; then
-		printf "" > build/tup.config
-	fi
-	lua scripts/getdeps.lua
+	lua scripts/getdeps.lua clone
 	[[ ! "$?" == "0" ]] && exit 1
 else
 	printf "[!] You'll need lua installed to compile this project!\n"
 	exit 1
 fi
 
-if [[ ! -s "build/tup.config" ]]; then
-	echo "CONFIG_DEBUG=n" >> build/tup.config
-	echo "CONFIG_CC=gcc" >> build/tup.config
-	echo "CONFIG_AR=ar rcu" >> build/tup.config
-	echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
-fi
+printf "" > build/tup.config
+
+echo "CONFIG_DEBUG=n" >> build/tup.config
+echo "CONFIG_CC=gcc" >> build/tup.config
+echo "CONFIG_AR=ar rcu" >> build/tup.config
+echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
+lua scripts/getdeps.lua configure
 
 export PATH=${CWD}:$PATH
 
