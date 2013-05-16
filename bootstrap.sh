@@ -19,13 +19,15 @@ else
 	exit 1
 fi
 
-printf "" > build/tup.config
+if [[ ! -s "build/tup.config" ]]; then
+	printf "" > build/tup.config
 
-echo "CONFIG_DEBUG=n" >> build/tup.config
-echo "CONFIG_CC=gcc" >> build/tup.config
-echo "CONFIG_AR=ar rcu" >> build/tup.config
-echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
-lua scripts/getdeps.lua configure
+	echo "CONFIG_DEBUG=n" >> build/tup.config
+	echo "CONFIG_CC=gcc" >> build/tup.config
+	echo "CONFIG_AR=ar rcu" >> build/tup.config
+	echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
+	lua scripts/getdeps.lua configure
+fi
 
 export PATH=${CWD}:$PATH
 
