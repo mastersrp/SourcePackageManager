@@ -1,4 +1,4 @@
-target = {}
+local target = {}
 
 target.name = "clone"
 
@@ -16,3 +16,5 @@ target.execute = function( cfg )
     end
   end
 end
+
+return target
