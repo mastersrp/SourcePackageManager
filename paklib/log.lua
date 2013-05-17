@@ -1,4 +1,4 @@
-log = {
+local log = {
   file = ".spm/log",
   info = function(msg)
     local logfile = io.open(log.file, 'a+')
