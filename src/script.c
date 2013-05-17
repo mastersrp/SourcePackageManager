@@ -13,13 +13,18 @@ lua_State *spm_script_init() {
 	lua_setglobal(vm,"DEBUG");
 	return vm;
 }
-int spm_script_sendargs( lua_State *vm, int argc, char *argv[] ) {
-	int narg;
-	narg = argc - (lua_gettop(vm) + 1);
-	lua_createtable(vm,argc,argc+1);
-	for( int i=0; i<argc; i++ ) {
+/*
+ * Following function is pretty much taken directly from lua 'static int getargs (lua_State *L, char **argv, int n).
+ * The below function is a slightly modified version of that.
+ */
+int spm_script_sendargs( lua_State *vm, char **argv ) {
+	int i;
+	int argc = 0;
+	while( argv[argc]) argc++;
+	lua_createtable(vm,argc,0);
+	for( i=0; i<argc; i++ ) {
 		lua_pushstring(vm,argv[i]);
-		lua_rawseti(vm,-2, i - lua_gettop(vm));
+		lua_rawseti(vm,-2, i);
 	}
 	lua_setglobal( vm, "arg" );
 	return 0;

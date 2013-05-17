@@ -13,7 +13,7 @@ int main( int argc, char **argv ) {
 	}
 	spm_script_openlibs( vm );
 	// TODO: Below functions all cause segmentation faults. FIX!
-	spm_script_sendargs( vm, argc, argv );
+	spm_script_sendargs( vm, argv );
 	//SPM_SCRIPT_LIBRARY_ADD_FUNCTION(vm,"io",io_dclose,"dclose");
 	//SPM_SCRIPT_LIBRARY_ADD_FUNCTION(vm,"io",io_dopen,"dopen");
 	spm_script_dofile( vm, ".spm/paklib/main.lua" );
