@@ -1,6 +1,6 @@
 require 'io'
 
-deps = {}
+local deps = {}
 
 deps["lua"] = {
 	url="mastersrp/lua",
@@ -29,7 +29,7 @@ deps["dht"] = {
 	end
 }
 
-pkg = {}
+local pkg = {}
 
 pkg["spm"] = {
 	configure=function()
@@ -38,5 +38,7 @@ pkg["spm"] = {
 		os.execute( "./bootstrap.sh" )
 	end
 }
+
+return deps,pkg
 
 -- vim: filetype=lua

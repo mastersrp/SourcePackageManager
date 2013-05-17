@@ -6,7 +6,7 @@ io.exists = function( file )
 	if err == nil then return false else return true end
 end
 
-dofile( "Sourcefile" )
+local deps,pkg = dofile( "Sourcefile" )
 
 for k,_ in pairs(deps) do
 	local v = deps[k]["url"] or ""

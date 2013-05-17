@@ -1,4 +1,4 @@
-dofile( 'Sourcefile' )
+local deps,pkg = dofile( 'Sourcefile' )
 
 local cfg = {deps,arg}
 
