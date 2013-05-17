@@ -1,6 +1,8 @@
-target = {}
+local target = {}
 
 target.name = "pull"
+
+target.deps = {"clone"}
 
 target.execute = function( cfg )
   goto eof
@@ -22,3 +24,5 @@ target.execute = function( cfg )
   end
   ::eof::
 end
+
+return target

@@ -1,6 +1,8 @@
-target = {}
+local target = {}
 
 target.name = "build"
+
+target.deps = {"configure"}
 
 target.execute = function( cfg )
   goto eof
@@ -9,3 +11,5 @@ target.execute = function( cfg )
   end
   ::eof::
 end
+
+return target
