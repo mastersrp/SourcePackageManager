@@ -9,7 +9,7 @@ mkdir -p .spm/paklib/lib
 printf " * Creating .spm archive ...";
 cp -f ../src/spm .spm/bin/spm
 cp -f ../deps/tup/tup .spm/bin/tup
-cp -Rf ../paklib/* .spm/paklib/
+cp -rf ../paklib/ .spm/
 printf "[DONE]\n";
 
 # Archive .spm into spm.tgz and add the payload to the shell script
