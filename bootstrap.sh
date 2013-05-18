@@ -29,9 +29,11 @@ if [[ ! -s "build/tup.config" ]]; then
 	lua scripts/getdeps.lua configure
 fi
 
-export PATH=${CWD}:$PATH
-
-TUP=$(which tup);
+if [[ -x "{CWD}/tup" ]]; then
+	TUP=${CWD}/tup
+else
+	TUP=$(which tup);
+fi
 if [[ ! -e "$TUP" ]]; then
 	printf "Building tup...\n" | tee .spm/log -a;
 	cd ${CWD}/deps/tup;

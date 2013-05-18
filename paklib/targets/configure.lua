@@ -5,11 +5,10 @@ target.name = "configure"
 target.deps = {"clone"}
 
 target.execute = function( cfg )
-  goto eof
   for k,_ in pairs(cfg[1]) do
     print( "* Configuring \"" .. k .. "\" ... " )
+    cfg[1][k].configure( "./deps/" .. k )
   end
-  ::eof::
 end
 
 return target

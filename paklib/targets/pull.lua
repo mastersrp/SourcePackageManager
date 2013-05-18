@@ -12,9 +12,6 @@ target.execute = function( cfg )
     git.pull = function( repo )
       return os.execute( "cd ./deps/" .. repo .. "; git pull; cd ../..")
     end
-    git.clone = function( repo, url )
-      return os.execute( "git clone " .. url .. " ./deps/" .. repo )
-    end
   end
   local repos = {"github.com","bitbucket.com"}
   for d,_ in pairs(cfg[1]) do
