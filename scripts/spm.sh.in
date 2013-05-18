@@ -9,7 +9,6 @@ function untar_payload {
 if [[ ! -d ".spm/paklib" || ! -e ".spm/bin/spm" ]]; then
 	untar_payload
 fi
-export PATH=$(pwd -P)/.spm/bin:$PATH;
 export LUA_PATH_5_2=$(pwd -P)/.spm/paklib/?.lua
-spm $@
+.spm/bin/spm $@
 exit $?

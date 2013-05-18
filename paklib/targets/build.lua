@@ -5,11 +5,14 @@ target.name = "build"
 target.deps = {"configure"}
 
 target.execute = function( cfg )
-  goto eof
-  for k,_ in pairs(cfg[1]) do
-    print( "* Building \"" .. k .. "\" ..." )
+  print( "* Building everything..." )
+  local err
+  if io.exists('.tup/db') == false then
+    err = os.execute('.spm/bin/tup init')
+    if err ~= 0 then return false end
   end
-  ::eof::
+  err = os.execute('.spm/bin/tup upd')
+  if err ~= 0 then return false else return true end
 end
 
 return target
