@@ -3,6 +3,5 @@
 .spm/paklib/
 .spm/bin/
 deps/
-bin/
 build/
 scripts/spm
