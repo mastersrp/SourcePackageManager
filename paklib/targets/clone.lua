@@ -15,7 +15,9 @@ target.execute = function( cfg )
     if io.exists( "./deps/" .. k .. "/.git/config" ) == false then
       local remotes = {"github.com"}
       for r,_ in pairs(remotes) do
-        ret = git.exists( "git://" .. remotes[r] .. "/" .. repo )
+        local repo = dofile '.spm/paklib/repo/' .. remotes[r] .. '.lua'
+        local remote = string.gsub(repo.url,"%$(%w+)", cfg[1][k]["url"])
+        ret = git.exists( remote )
         if ret == true then url = "git://" .. remotes[r] .. "/" .. repo end
       end
       if url == nil then return "missing url" end
