@@ -6,6 +6,7 @@ io.exists = function( file )
 	if err == nil then return false else return true end
 end
 
+local conf = dofile('paklib/utils/conf.lua')
 local deps,pkg = dofile( "Sourcefile" )
 
 for k,_ in pairs(deps) do
@@ -29,12 +30,12 @@ for k,_ in pairs(deps) do
 			else
 				domain = ""
 			end
-			os.execute( "git clone " .. domain .. v .. " deps/" .. k )
+			os.execute( "git clone " .. domain .. v .. " deps/" .. v )
 		end
 	elseif arg[1] == "configure" then
-		io.open("build/tup.config","a"):write("CONFIG_DIR_" .. string.upper(k) .. "_ROOT=./deps/" .. k .. "\n" )
-		io.open("build/tup.config","a"):write("CONFIG_USE_" .. string.upper(k) .. "=y \n")
 		print( "* Configuring \"" .. k .. "\"..." )
+		conf.update( 'DIR_' .. string.upper(k) .. '_ROOT', './deps/' .. v )
+		conf.update( 'USE_' .. string.upper(k), 'y' )
 		deps[k]["configure"]( "deps/" .. k )
 	end
 end

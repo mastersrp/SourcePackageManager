@@ -3,6 +3,9 @@ local target = {}
 if git == nil then
   require 'utils/git'
 end
+require 'utils/conf'
+
+local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 
 target.name = "clone"
 
@@ -12,18 +15,22 @@ target.execute = function( cfg )
     local repo = cfg[1][k]["url"]
     local url = nil
     local ret
-    if io.exists( "./deps/" .. k .. "/.git/config" ) == false then
+    if io.exists( "./deps/" .. repo .. "/.git/config" ) == false then
       local remotes = {"github.com"}
       for r,_ in pairs(remotes) do
-        local repo = dofile '.spm/paklib/repo/' .. remotes[r] .. '.lua'
+        local repo = dofile( paklib_root .. '/repo/' .. remotes[r] .. '.lua' )
         local remote = string.gsub(repo.url,"%$(%w+)", cfg[1][k]["url"])
         ret = git.exists( remote )
-        if ret == true then url = "git://" .. remotes[r] .. "/" .. repo end
+        if ret == true then url = remote end
       end
       if url == nil then return "missing url" end
-      print( "* Cloning \"" .. k .."\" into \"./deps/" .. k .. "\"..." )
-      ret = git.clone(url,repo)
-      if ret ~= true then return "cloning failed" else return true end
+      print( "* Cloning \"" .. k .."\" into \"./deps/" .. repo .. "\"..." )
+      ret = git.clone(url, './deps/' .. repo)
+      if ret ~= true then 
+        return "cloning failed" 
+      else 
+        conf.update( 'DIR_' .. string.upper(k) .. '_ROOT', './deps/' .. repo )
+      end
     else
       print( "[i] Skipping \"" .. k .."\"... ")
     end

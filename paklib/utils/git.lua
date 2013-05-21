@@ -3,15 +3,15 @@ if git == nil then -- if git isn't built in
 
   git.exists = function( remote )
     local err = os.execute( "git ls-remote --heads " .. remote .. " master" )
-    if err == 0 then return true else return "no remotes found" end
+    if err == true then return true else return "no remotes found" end
   end
   git.clone = function( remote, lokal )
     local err = os.execute( "git clone " .. remote .. " " .. lokal )
-    if err == 0 then return true else return "cloning failed!" end
+    if err == true then return true else return "cloning failed!" end
   end
   git.pull = function( repo )
     local err = os.execute( "cd " .. repo .. "; git pull; cd ../..")
-    if err == 0 then return true else return "could not pull in \"" .. repo .. "\"" end
+    if err == true then return true else return "could not pull in \"" .. repo .. "\"" end
   end
   
   return git
