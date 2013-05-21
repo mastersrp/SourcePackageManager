@@ -11,23 +11,25 @@ install -d ${CWD}/bin
 which lua &>/dev/null
 lua_installed=$?
 
+export LUA_PATH=$(pwd -P)/paklib/?.lua
+export PAKLIB_ROOT=$(pwd -P)/paklib
+
 if [[ "$lua_installed" == "0" ]]; then
-	lua scripts/getdeps.lua pull
+	lua paklib/main.lua clone
 	[[ ! "$?" == "0" ]] && exit 1
 else
 	printf "[!] You'll need lua installed to compile this project!\n"
 	exit 1
 fi
 
-if [[ ! -s "build/tup.config" ]]; then
-	printf "" > build/tup.config
-
-	echo "CONFIG_DEBUG=n" >> build/tup.config
-	echo "CONFIG_CC=gcc" >> build/tup.config
-	echo "CONFIG_AR=ar rcu" >> build/tup.config
-	echo "CONFIG_BUILD_TYPE=standalone" >> build/tup.config
-	lua scripts/getdeps.lua configure
-fi
+echo "conf = dofile 'paklib/utils/conf.lua'
+conf.update( 'DEBUG','n' )
+conf.update( 'CC', 'gcc' )
+conf.update( 'AR', 'ar rcu' )
+conf.update( 'BUILD_TYPE', 'standalone' )" | lua -
+[[ ! "$?" == "0" ]] && exit 1
+lua paklib/main.lua configure
+[[ ! "$?" == "0" ]] && exit 1
 
 if [[ -x "{CWD}/tup" ]]; then
 	TUP=${CWD}/tup
@@ -36,7 +38,9 @@ else
 fi
 if [[ ! -e "$TUP" ]]; then
 	printf "Building tup...\n" | tee .spm/log -a;
-	cd ${CWD}/deps/tup;
+	tup_root = $(echo "conf = dofile 'paklib/utils/conf.lua'
+	print( conf.get( 'TUP_ROOT' ) )" | lua -)
+	cd ${CWD}/${tup_root}
 	./bootstrap.sh;
 	cp -vf {.tup,tup} ${CWD};
 	rm -vf {.tup,tup};
@@ -55,6 +59,5 @@ else
 fi
 
 if [[ "$?" == "0" ]]; then
-	#[[ -s "build/scripts/spm.sh" ]] && cp -vfu build/scripts/spm.sh bin/spm
 	echo "export PATH=$(pwd -P)/bin:\$PATH" > scripts/spm
 fi

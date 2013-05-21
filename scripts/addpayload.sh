@@ -5,10 +5,14 @@ mkdir -p .spm/paklib/include/spm
 mkdir -p .spm/bin
 mkdir -p .spm/paklib/lib
 
+tup_root=$( echo "conf = dofile '../paklib/utils/conf.lua'
+print( conf.get( 'DIR_TUP_ROOT' ) ) " | lua -)
+[[ ! -e "../${tup_root}" ]] && exit 1
+
 # Copy the required files into .spm
 printf " * Creating .spm archive ...";
-cp -f ../src/spm .spm/bin/spm
-cp -f ../deps/tup/tup .spm/bin/tup
+cp -vf ../src/spm .spm/bin/spm
+cp -vf ../${tup_root}/tup .spm/bin/tup
 cp -rf ../paklib/ .spm/
 find .spm/paklib/ -iname '*.swp' -delete
 printf "[DONE]\n";
