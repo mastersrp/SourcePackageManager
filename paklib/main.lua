@@ -1,11 +1,12 @@
 require 'io'
 require 'utils/io'
+require 'utils/conf'
 
 local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 
 local deps,pkg = dofile( 'Sourcefile' )
 
-local cfg = {deps,arg}
+local cfg = {deps,arg,pkg,conf}
 
 if spm == nil then spm = {} end
 
