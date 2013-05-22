@@ -10,7 +10,7 @@ conf.update = function(key,var,confile)
   local config = ""
   if f ~= nil then 
     f = f:read('*a')
-    for k,v in string.gmatch(f,"(%g+)=(%S+)") do
+    for k,v in string.gmatch(f,"(%g+)=([^\n]+)") do
       t[k] = v
     end
   end
@@ -35,7 +35,7 @@ conf.get = function(key, confile)
   local t = {}
   if f == nil then return "could not open config file" end
   f = f:read('*a')
-  for k,v in string.gmatch(f,"(%g+)=(%S+)") do
+  for k,v in string.gmatch(f,"(%g+)=([^\n]+)") do
     t[k] = v
   end
   if t[key] == nil then return false else return t[key] end

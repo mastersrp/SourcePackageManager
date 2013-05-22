@@ -6,7 +6,7 @@ mkdir -p .spm/bin
 mkdir -p .spm/paklib/lib
 
 tup_root=$( echo "conf = dofile '../paklib/utils/conf.lua'
-print( conf.get( 'DIR_TUP_ROOT' ) ) " | lua -)
+print( conf.get( 'DIR_TUP_ROOT', '../tup.config' ) ) " | lua -)
 [[ ! -e "../${tup_root}" ]] && exit 1
 
 # Copy the required files into .spm
