@@ -36,6 +36,19 @@ Compiling SPM is simply done by running
 
 In the root of the SPM directory.  
 The bootstrap script also creates a bin/spm script which contain the required binaries and scripts to run. This script can also be shipped alongside your projects. Please note that binaries are NOT platform-agnostic, and as such SPM built on 64bit platform will NOT run on a 32bit platform.    
+  
+Alternatively you can try to run the lite spm.sh script which is the lite version of SPM copied from a successful build from build/scripts/spm.sh to spm.sh.  
+First, configure the system:
+  
+    ./spm.sh configure
+
+Then check the configuration in build/tup.config and make sure that everything is set to values that you're okay with.  
+To build a lite SPM package, simply change the BUILD\_TYPE configuration from 'standalone' to 'lite' and the build files will do the rest.  
+Then, to build the system, simply run
+
+    ./spm.sh build
+
+This will build the entire system and all dependencies.
 Installation
 ------------
 
