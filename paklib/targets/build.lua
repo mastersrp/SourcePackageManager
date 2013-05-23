@@ -9,7 +9,6 @@ target.execute = function( cfg )
   local err
   if io.exists('.tup/db') == false then
     err = os.execute('tup init')
-    print( err )
     if err ~= true then return "could not init tup database" end
   end
   err = os.execute('tup upd')
