@@ -1,0 +1,3 @@
+ifeq (@(BUILD_TYPE),standalone)
+: ../src/libspm.a |> ^ MV %f -> %o^ mv ../src/libspm.a . |> libspm.a
+endif
