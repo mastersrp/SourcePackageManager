@@ -22,6 +22,7 @@ spm.checkdeps = function( target_key, cfg )
     end
   end
   print( "Run target/" .. target.name )
+  log.debg( "Run target/" .. target.name )
   err = target.execute( cfg )
   if err == nil then err = true end
   if err ~= true then return err else return true end
@@ -36,12 +37,16 @@ for k,v in pairs(arg) do
         ret = spm.checkdeps( target.deps[k], cfg ) 
         if ret ~= true then 
           print( "Error occured! (error: " .. tostring(ret) .. ")" )
+          log.erro( tostring(ret) )
           return false 
         end
       end
     end
     print( "Run target/" .. target.name )   
     local err = target.execute( cfg )
-    if err ~= true then print( "Error occured! (error: " .. tostring(err) .. ")") end
+    if err ~= true then 
+      print( "Error occured! (error: " .. tostring(err) .. ")") 
+      log.erro( tostring(err) )
+    end
   end
 end
