@@ -22,6 +22,7 @@ target.execute = function( cfg )
       cfg[3][k].configure( cfg )
     end
   end
+  return true
 end
 
 return target
