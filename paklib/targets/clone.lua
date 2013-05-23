@@ -29,7 +29,7 @@ target.execute = function( cfg )
       if ret ~= true then 
         return "cloning failed" 
       else 
-        conf.update( 'DIR_' .. string.upper(k) .. '_ROOT', './deps/' .. repo )
+        conf.create( 'DIR_' .. string.upper(k) .. '_ROOT', './deps/' .. repo )
       end
     else
       print( "[i] Skipping \"" .. k .."\"... ")
