@@ -1,6 +1,7 @@
 require 'io'
 require 'utils/io'
 require 'utils/conf'
+require 'log'
 
 local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 
