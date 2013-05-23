@@ -1,7 +1,11 @@
 #!/bin/bash
 
+[[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=$(pwd -P)/.spm/paklib
+
+build_type=$( echo "conf = dofile '../paklib/utils/conf.lua'
+print( conf.get( 'BUILD_TYPE', '../tup.config' ) ) " | lua -)
+
 # Ensure that .spm/ exists before trying to write to it
-mkdir -p .spm/paklib/include/spm
 mkdir -p .spm/bin
 mkdir -p .spm/paklib/lib
 
@@ -11,8 +15,10 @@ print( conf.get( 'DIR_TUP_ROOT', '../tup.config' ) ) " | lua -)
 
 # Copy the required files into .spm
 printf " * Creating .spm archive ...";
-cp -vf ../src/spm .spm/bin/spm
-cp -vf ../${tup_root}/tup .spm/bin/tup
+if [[ "$build_type" == "standalone" ]]; then
+	cp -f ../src/spm .spm/bin/spm
+	cp -f ../${tup_root}/tup .spm/bin/tup
+fi
 cp -rf ../paklib/ .spm/
 find .spm/paklib/ -iname '*.swp' -delete
 printf "[DONE]\n";
@@ -21,7 +27,8 @@ printf "[DONE]\n";
 printf " * Creating spm.tar.bz2...";
 tar -cf spm.tar .spm/
 bzip2 -9 spm.tar
-cp -f spm.sh.in spm.sh
+[[ "$build_type" == "standalone" ]] && printf " [ type -> standalone ] " && cp -f spm.sh.in spm.sh
+[[ "$build_type" == "lite" ]] && printf " [ type -> lite ] " && cp -f spm-lite.sh.in spm.sh
 echo "PAYLOAD:" >> spm.sh
 base64 spm.tar.bz2 >> spm.sh
 printf "[DONE]\n";
