@@ -1,4 +1,4 @@
-local log = {}
+log = {}
 
 log.file = ".spm/log"
 

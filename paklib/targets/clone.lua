@@ -4,6 +4,7 @@ if git == nil then
   require 'utils/git'
 end
 require 'utils/conf'
+require 'log'
 
 local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 
@@ -24,6 +25,7 @@ target.execute = function( cfg )
       end
       if url == nil then return "missing url" end
       print( "* Cloning \"" .. k .."\" into \"./deps/" .. repo .. "\"..." )
+      log.info( 'Cloninig "' .. k .. '" info "./deps/' .. repo .. '"...' )
       ret = git.clone(url, './deps/' .. repo)
       if ret ~= true then 
         return "cloning failed" 
@@ -32,6 +34,7 @@ target.execute = function( cfg )
       end
     else
       print( "[i] Skipping \"" .. k .."\"... ")
+      log.info( 'Skipping "' .. k .. '"...' )
     end
   end
 

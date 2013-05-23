@@ -1,11 +1,14 @@
 local target = {}
 
+require 'log'
+
 target.name = "build"
 
 target.deps = {"configure"}
 
 target.execute = function( cfg )
   print( "* Building everything..." )
+  log.info( 'Building everything...' )
   local err
   if io.exists('.tup/db') == false then
     err = os.execute('tup init')
