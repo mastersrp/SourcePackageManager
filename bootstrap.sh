@@ -51,7 +51,3 @@ if [[ "$verbose" ]]; then
 else
 	$TUP upd;
 fi
-
-if [[ "$?" == "0" ]]; then
-	echo "export PATH=$(pwd -P)/bin:\$PATH" > scripts/spm
-fi
