@@ -14,6 +14,7 @@ conf.update = function(key,var,confile)
       t[k] = v
     end
   end
+  if t[key] == var then return true end -- avoid writing a variable already set
   t[key] = var
   f = io.open(confile,'w+b')
   f:flush()

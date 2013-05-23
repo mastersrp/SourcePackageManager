@@ -11,8 +11,8 @@ install -d ${CWD}/bin
 which lua &>/dev/null
 lua_installed=$?
 
-export LUA_PATH=$(pwd -P)/paklib/?.lua
-export PAKLIB_ROOT=$(pwd -P)/paklib
+[[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=./paklib
+export LUA_PATH=${PAKLIB_ROOT}/?.lua
 
 if [[ "$lua_installed" == "0" ]]; then
 	lua paklib/main.lua clone
@@ -22,12 +22,6 @@ else
 	exit 1
 fi
 
-echo "conf = dofile 'paklib/utils/conf.lua'
-conf.update( 'DEBUG','n' )
-conf.update( 'CC', 'gcc' )
-conf.update( 'AR', 'ar rcu' )
-conf.update( 'BUILD_TYPE', 'standalone' )" | lua -
-[[ ! "$?" == "0" ]] && exit 1
 lua paklib/main.lua configure
 [[ ! "$?" == "0" ]] && exit 1
 

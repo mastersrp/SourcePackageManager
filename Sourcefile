@@ -34,10 +34,10 @@ local pkg = {}
 pkg["spm"] = {
 	configure=function( cfg )
 		local conf = cfg[4]
-		conf.update( 'DEBUG','n' )
-		conf.update( 'CC', 'gcc' )
-		conf.update( 'AR', 'ar rcu' )
-		conf.update( 'BUILD_TYPE', 'standalone' )
+		if not conf.get('DEBUG') then conf.update( 'DEBUG','n' ) end
+		if not conf.get('CC') then conf.update( 'CC', 'gcc' ) end
+		if not conf.get('AR') then conf.update( 'AR', 'ar rcu' ) end
+		if not conf.get('BUILD_TYPE') then conf.update( 'BUILD_TYPE', 'standalone' ) end
 	end
 }
 

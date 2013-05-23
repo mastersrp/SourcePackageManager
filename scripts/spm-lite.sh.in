@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=$(pwd -P)/.spm/paklib
+
+function untar_payload {
+	match=$(grep --text --line-number '^PAYLOAD:$' $0 | cut -d ':' -f 1)
+	payload_start=$((match + 1))
+	tail -n +$payload_start $0 | base64 -d | tar -xjf -
+}
+
+if [[ ! -d "${PAKLIB_ROOT}" ]]; then
+	untar_payload
+fi
+export LUA_PATH=${PAKLIB_ROOT}/?.lua
+lua ${PAKLIB_ROOT}/main.lua $@
+exit $?
