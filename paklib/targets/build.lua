@@ -12,7 +12,12 @@ target.execute = function( cfg )
     if err ~= true then return "could not init tup database" end
   end
   err = os.execute('tup upd')
-  if err ~= true then return "could not build targets!" else return true end
+  if err ~= true then return "could not build targets!" end
+  for k,_ in pairs(cfg[3]) do
+    if cfg[3][k].build ~= nil then
+      cfg[3][k].build(cfg)
+    end
+  end
 end
 
 return target
