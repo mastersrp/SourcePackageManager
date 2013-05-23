@@ -10,7 +10,6 @@ local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 target.name = "clone"
 
 target.execute = function( cfg )
-
   for k,_ in pairs(cfg[1]) do
     local repo = cfg[1][k]["url"]
     local url = nil
@@ -35,6 +34,8 @@ target.execute = function( cfg )
       print( "[i] Skipping \"" .. k .."\"... ")
     end
   end
+
+  return true
 end
 
 return target
