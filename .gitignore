@@ -3,11 +3,5 @@
 .spm/paklib/
 .spm/bin/
 deps/
-!build/tup.config
-build/src/
-build/scripts/
-build/deps/
-src/*.a
-src/spm
-src/*.o
-scripts/spm.sh
+build/
+scripts/spm
