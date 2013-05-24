@@ -12,5 +12,6 @@ if [[ ! -d "${PAKLIB_ROOT}" || ! -e ".spm/bin/spm" ]]; then
 	untar_payload
 fi
 export LUA_PATH=${PAKLIB_ROOT}/?.lua
+install -d build/
 .spm/bin/spm $@
 exit $?
