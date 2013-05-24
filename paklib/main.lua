@@ -1,4 +1,5 @@
 require 'io'
+require 'utils/sh'
 require 'utils/io'
 require 'utils/conf'
 require 'log'
