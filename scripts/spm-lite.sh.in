@@ -2,13 +2,17 @@
 
 [[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=$(pwd -P)/.spm/paklib
 
+for arg in "$@"; do
+	[[ "$arg" == "--force-unpack" ]] && force_unpack = true
+done
+
 function untar_payload {
 	match=$(grep --text --line-number '^PAYLOAD:$' $0 | cut -d ':' -f 1)
 	payload_start=$((match + 1))
 	tail -n +$payload_start $0 | base64 -d | tar -xjf -
 }
 
-if [[ ! -d "${PAKLIB_ROOT}" ]]; then
+if [[ ! -d "${PAKLIB_ROOT}" || "$force_unpack" == "true" ]]; then
 	untar_payload
 fi
 export LUA_PATH=${PAKLIB_ROOT}/?.lua
