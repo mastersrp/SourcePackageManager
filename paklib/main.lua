@@ -7,7 +7,7 @@ local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 
 local deps,pkg = dofile( 'Sourcefile' )
 
-local cfg = {deps,arg,pkg,conf}
+local cfg = {deps=deps,arg=args,pkg=pkg,conf=conf}
 
 if spm == nil then spm = {} end
 

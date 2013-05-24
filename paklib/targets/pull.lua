@@ -13,7 +13,7 @@ target.deps = {"clone"}
 target.execute = function( cfg )
   goto eof
   local repos = {"github.com"}
-  for d,_ in pairs(cfg[1]) do
+  for d,_ in pairs(cfg["deps"]) do
     for k,v in pairs(repos) do
       local repo = dofile( paklib_root .. '/repo/' .. v .. '.lua' )
       local remote = string.gsub(repo.url,"%$(%w+)", cfg[1][d]["url"])

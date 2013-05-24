@@ -11,15 +11,15 @@ local paklib_root = os.getenv('PAKLIB_ROOT') or ".spm/paklib"
 target.name = "clone"
 
 target.execute = function( cfg )
-  for k,_ in pairs(cfg[1]) do
-    local repo = cfg[1][k]["url"]
+  for k,_ in pairs(cfg["deps"]) do
+    local repo = cfg["deps"][k]["url"]
     local url = nil
     local ret
     if io.exists( "./deps/" .. repo .. "/.git/config" ) == false then
       local remotes = {"github.com"}
       for r,_ in pairs(remotes) do
         local repo = dofile( paklib_root .. '/repo/' .. remotes[r] .. '.lua' )
-        local remote = string.gsub(repo.url,"%$(%w+)", cfg[1][k]["url"])
+        local remote = string.gsub(repo.url,"%$(%w+)", cfg["deps"][k]["url"])
         ret = git.exists( remote )
         if ret == true then url = remote end
       end
