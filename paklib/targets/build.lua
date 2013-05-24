@@ -26,6 +26,7 @@ target.execute = function( cfg )
       cfg["pkg"][k].build(cfg)
     end
   end
+  return true
 end
 
 return target
