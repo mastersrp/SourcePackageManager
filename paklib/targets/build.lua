@@ -19,7 +19,8 @@ target.execute = function( cfg )
   if err ~= true then return "could not build targets!" end
   for k,_ in pairs(cfg["deps"]) do
     if cfg["deps"][k].build ~= nil then
-      cfg["deps"][k].build(cfg)
+      local repo = "./deps/" .. cfg["deps"][k]["url"]
+      cfg["deps"][k].build( repo )
     end
   end
   for k,_ in pairs(cfg["pkg"]) do
