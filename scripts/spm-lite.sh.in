@@ -12,5 +12,6 @@ if [[ ! -d "${PAKLIB_ROOT}" ]]; then
 	untar_payload
 fi
 export LUA_PATH=${PAKLIB_ROOT}/?.lua
+install -d build/
 lua ${PAKLIB_ROOT}/main.lua $@
 exit $?
