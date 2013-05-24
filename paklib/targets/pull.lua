@@ -11,7 +11,6 @@ target.name = "pull"
 target.deps = {"clone"}
 
 target.execute = function( cfg )
-  goto eof
   local repos = {"github.com"}
   for d,_ in pairs(cfg["deps"]) do
     for k,v in pairs(repos) do
@@ -20,9 +19,11 @@ target.execute = function( cfg )
       local err
       err = git.exists( remote )
       if err ~= true then return err end
+      err = git.pull( "./deps/" .. cfg["deps"][k].url )
+      if err ~= true then return err end
     end
   end
-  ::eof::
+  return true
 end
 
 return target
