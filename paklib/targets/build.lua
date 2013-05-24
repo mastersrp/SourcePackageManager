@@ -15,12 +15,14 @@ target.execute = function( cfg )
     if cfg["deps"][k].build ~= nil then
       local repo = "./deps/" .. cfg["deps"][k]["url"]
       err = cfg["deps"][k].build( repo )
+      if err == nil then err = true end
       if err ~= true then return "could not build " .. k end
     end
   end
   for k,_ in pairs(cfg["pkg"]) do
     if cfg["pkg"][k].build ~= nil then
       err = cfg["pkg"][k].build(cfg)
+      if err == nil then err = true end
       if err ~= true then return "could not build " .. k end
     end
   end
