@@ -33,7 +33,7 @@ local pkg = {}
 
 pkg["spm"] = {
 	configure=function( cfg )
-		local conf = cfg[4]
+		local conf = cfg["conf"]
 		conf.create( 'DEBUG','n' )
 		conf.create( 'CC', 'gcc' )
 		conf.create( 'AR', 'ar rcu' )
