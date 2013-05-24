@@ -16,9 +16,14 @@ target.execute = function( cfg )
   end
   err = os.execute('tup upd')
   if err ~= true then return "could not build targets!" end
-  for k,_ in pairs(cfg[3]) do
-    if cfg[3][k].build ~= nil then
-      cfg[3][k].build(cfg)
+  for k,_ in pairs(cfg["deps"]) do
+    if cfg["deps"][k].build ~= nil then
+      cfg["deps"][k].build(cfg)
+    end
+  end
+  for k,_ in pairs(cfg["pkg"]) do
+    if cfg["pkg"][k].build ~= nil then
+      cfg["pkg"][k].build(cfg)
     end
   end
 end
