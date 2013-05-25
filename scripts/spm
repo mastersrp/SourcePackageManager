@@ -1,0 +1,4 @@
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export PATH=${DIR}/../build/bin:$PATH
+
+# Add custom options or settings below, like persistent environment variables.

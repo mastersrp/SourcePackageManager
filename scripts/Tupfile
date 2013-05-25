@@ -1,1 +1,5 @@
-: ../src/spm ../deps/tup/tup ../paklib/main.lua ../paklib/log.lua |> ./addpayload.sh |> spm.sh
+ifeq (@(BUILD_TYPE),standalone)
+: ../src/spm ../@(DIR_TUP_ROOT)/tup ../paklib/*.lua ../paklib/utils/*.lua ../paklib/repo/*.lua ../paklib/targets/*.lua |> ./addpayload.sh |> spm.sh
+else
+: ../paklib/*.lua ../paklib/utils/*.lua ../paklib/repo/*.lua ../paklib/targets/*.lua |> ./addpayload.sh |> spm.sh
+endif

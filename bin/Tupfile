@@ -1,0 +1,1 @@
+: ../scripts/spm.sh |> ^ CP %f -> %o^ cp -fu ../scripts/spm.sh spm |> spm

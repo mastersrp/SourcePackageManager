@@ -1,0 +1,5 @@
+include_rules
+
+ifeq (@(BUILD_TYPE),standalone)
+: foreach *.c | *.h ../../@(DIR_LIBGIT2_ROOT)/include/git2.h |> !cc |>
+endif

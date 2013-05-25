@@ -1,6 +1,6 @@
 #include "script.h"
 
-int spm_script_error(vm,err) {
+int spm_script_error( lua_State *vm, int err) {
 	if( err ) {
 		fprintf(stderr,"lua: %s\n", lua_tostring(vm,-1) );
 		return err;
@@ -13,14 +13,20 @@ lua_State *spm_script_init() {
 	lua_setglobal(vm,"DEBUG");
 	return vm;
 }
-int spm_script_sendargs( lua_State *vm, int argc, char *argv[] ) {
+/*
+ * Following function is pretty much taken directly from lua 'static int getargs (lua_State *L, char **argv, int n).
+ * The below function is a slightly modified version of that.
+ */
+int spm_script_sendargs( lua_State *vm, char **argv ) {
+	int i;
+	int argc = 0;
+	while( argv[argc]) argc++;
 	lua_createtable(vm,argc,0);
-	int top = lua_gettop( vm );
-	for( int i=0; i<argc; i++ ) {
-		lua_pushstring( vm, argv[i] );
-		lua_settable( vm, top );
+	for( i=0; i<argc; i++ ) {
+		lua_pushstring(vm,argv[i]);
+		lua_rawseti(vm,-2, i);
 	}
-	lua_setglobal( vm, "ARGS" );
+	lua_setglobal( vm, "arg" );
 	return 0;
 }
 int spm_script_openlibs( lua_State *vm ) {
@@ -48,4 +54,5 @@ int SPM_SCRIPT_LIBRARY_ADD_FUNCTION( lua_State *vm, const char *lib, int functio
 	lua_pushstring(vm,function_name);
 	lua_pushcfunction(vm,function);
 	lua_rawset(vm,-3);
+	return 0;
 }
