@@ -30,15 +30,9 @@ Compiling
 Currently, SPM is only supported for compilation on 32bit and 64bit architectures of GNU/Linux systems. Other systems may work out of the box, but have not been tested.  
 Feel free to open issues with patches if you got it working on your platform.  
   
-Compiling SPM is simply done by running
-
-    ./bootstrap.sh
-
-In the root of the SPM directory.  
-The bootstrap script also creates a bin/spm script which contain the required binaries and scripts to run. This script can also be shipped alongside your projects. Please note that binaries are NOT platform-agnostic, and as such SPM built on 64bit platform will NOT run on a 32bit platform.    
-  
-Alternatively you can try to run the lite spm.sh script which is the lite version of SPM copied from a successful build from build/scripts/spm.sh to spm.sh.  
-First, configure the system:
+First, you must configure the system. This step can be skipped, but for your security, it is urged that you first configure the package, and then check the configuration file for any errors.  
+The included spm.sh is a very lightweight script that simply runs spm from the lua code in the paklib directory.
+Configuratin is very simple:
   
     ./spm.sh configure
 
@@ -48,7 +42,9 @@ Then, to build the system, simply run
 
     ./spm.sh build
 
-This will build the entire system and all dependencies.
+This will build the entire system and all dependencies.  
+If anything goes wrong, feel free to check the log in the .spm directory.  
+
 Installation
 ------------
 
