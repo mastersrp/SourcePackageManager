@@ -57,4 +57,6 @@ Note that this only works for the current terminal session. For permanent use, y
 
     source [spm_clone_directory]/scripts/spm
 
-To your bashrc or zshrc file.
+To your bashrc or zshrc file.  
+  
+Alternatively, you can use [this gist](https://gist.github.com/willurd/5648907) to manage your PATH variable easily, without having to mess about a lot with rc files.

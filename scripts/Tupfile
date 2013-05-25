@@ -1,5 +1,9 @@
 ifeq (@(BUILD_TYPE),standalone)
 : ../src/spm ../@(DIR_TUP_ROOT)/tup ../paklib/*.lua ../paklib/utils/*.lua ../paklib/repo/*.lua ../paklib/targets/*.lua |> ./addpayload.sh |> spm.sh
-else
+endif
+ifeq (@(BUILD_TYPE),lite)
+: ../paklib/*.lua ../paklib/utils/*.lua ../paklib/repo/*.lua ../paklib/targets/*.lua |> ./addpayload.sh |> spm.sh
+endif
+ifeq (@(BUILD_TYPE),minimal)
 : ../paklib/*.lua ../paklib/utils/*.lua ../paklib/repo/*.lua ../paklib/targets/*.lua |> ./addpayload.sh |> spm.sh
 endif

@@ -5,6 +5,13 @@
 build_type=$( echo "conf = dofile '../paklib/utils/conf.lua'
 print( conf.get( 'BUILD_TYPE', '../tup.config' ) ) " | lua -)
 
+printf "[ type -> $build_type ]\n"
+
+if [[ "$build_type" == "minimal" ]]; then
+	cp -fu spm-minimal.sh.in spm.sh
+	exit 0
+fi
+
 # Ensure that .spm/ exists before trying to write to it
 mkdir -p .spm/bin
 mkdir -p .spm/paklib/lib
@@ -27,8 +34,8 @@ printf "[DONE]\n";
 printf " * Creating spm.tar.bz2...";
 tar -cf spm.tar .spm/
 bzip2 -9 spm.tar
-[[ "$build_type" == "standalone" ]] && printf " [ type -> standalone ] " && cp -f spm.sh.in spm.sh
-[[ "$build_type" == "lite" ]] && printf " [ type -> lite ] " && cp -f spm-lite.sh.in spm.sh
+[[ "$build_type" == "standalone" ]] && cp -fu spm.sh.in spm.sh
+[[ "$build_type" == "lite" ]] && cp -fu spm-lite.sh.in spm.sh
 echo "PAYLOAD:" >> spm.sh
 base64 spm.tar.bz2 >> spm.sh
 printf "[DONE]\n";
