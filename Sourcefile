@@ -1,0 +1,46 @@
+require 'io'
+
+local deps = {}
+
+deps["lua"] = {
+	url="mastersrp/lua",
+	configure=function( root )
+		io.open(root .. '/src/build.sh','w'):write('#!/bin/bash\nmake linux\nrm -rf *.o')
+		io.open(root .. '/src/Tupfile','w'):write(': |> bash build.sh |> lua luac liblua.a')
+	end
+}
+deps["tup"] = {
+	url="gittup/tup",
+	configure=function( root ) end
+}
+
+deps["libgit2"] = {
+	url="libgit2/libgit2",
+	configure=function( root )
+		io.open(root .. '/build.sh','w'):write('#!/bin/bash\ncmake .\ncmake --build . --target git2\nrm -rf CMakeCache.txt CMakeFiles/ cmake_install.cmake Makefile CTestTestfile.cmake\nmkdir tmp; mv libgit2.a tmp; cmake --build . --target clean; mv tmp/libgit2.a libgit2.a; rm -rf tmp/')
+		io.open(root .. '/Tupfile','w'):write(': |> bash build.sh |> libgit2.a libgit2.pc')
+	end
+}
+
+deps["dht"] = {
+	url="jech/dht",
+	configure=function( root )
+		io.open(root .. '/Tupfile','w'):write('!cc = |> ^ CC %f^ gcc -g -Wall -lcrypt -c %f -o %o |> %B.o\n!ar = |> ^ AR %o^ ar rcu %o %f |>\n: foreach dht.c | dht.h |> !cc |>\n: dht.o |> !ar |> libdht.a\n')
+	end
+}
+
+local pkg = {}
+
+pkg["spm"] = {
+	configure=function( cfg )
+		local conf = cfg["conf"]
+		conf.create( 'DEBUG','n' )
+		conf.create( 'CC', 'gcc' )
+		conf.create( 'AR', 'ar rcu' )
+		conf.create( 'BUILD_TYPE', 'standalone' )
+	end
+}
+
+return deps,pkg
+
+-- vim: filetype=lua

@@ -6,13 +6,13 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Os
 CFLAGS += -Wno-unused
-CFLAGS += -I@(DIR_TINYCC_INC)
-CFLAGS += -I@(DIR_LUA_INC)
-LDFLAGS += -L@(DIR_TINYCC_LIB)
-LDFLAGS += -L@(DIR_LUA_LIB)
+CFLAGS += -I$(TUP_CWD)/../@(DIR_LUA_ROOT)/src
+CFLAGS += -I$(TUP_CWD)/../@(DIR_LIBGIT2_ROOT)/include
+CFLAGS += -I$(TUP_CWD)/../@(DIR_DHT_ROOT)
+LDFLAGS += -L$(TUP_CWD)/../@(DIR_LUA_ROOT)/src
 LDFLAGS += -L$(TUP_CWD)
-LDFLAGS += @(LIB_LUA)
-LDFLAGS += @(LIB_TINYCC)
+LDFLAGS += -lm -llua -ldl -lspm
+LDFLAGS += -Wl,--as-needed
 
 ifeq (@(CC),)
 	CC = gcc
