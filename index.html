@@ -1,1 +1,124 @@
-Hello GitHubbers.
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>SourcePackageManager</title>
+  <meta name="description" content="Tiny embeddable package manager">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">SourcePackageManager</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Tiny embeddable package manager</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/mastersrp/SourcePackageManager/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/mastersrp/SourcePackageManager/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/mastersrp/SourcePackageManager" class="code">View SourcePackageManager on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>SourcePackageManager</h1>
+
+<p>.. A tiny embeddable package manager library and application.<br>
+SourcePackageManager, hereafter refered to as 'SPM', is designed to be used in the same way as RVM regarding paths, and in the same way as RubyGems in terms of managing packages, except with support for per-project dependencies, and not just system-wide and per-user packages. In fact, system-wide packages are not really handled by SPM, but instead left for your local system package manager.  </p>
+
+<p>To use this system, simply run</p>
+
+<pre><code>git clone https://github.com/mastersrp/SourcePackageManager.git ~/.spm
+</code></pre>
+
+<p>Then follow the instructions in the Compiling section.</p>
+
+<h2>Requirements</h2>
+
+<p>Even though SPM is rather small, it does have some dependencies.</p>
+
+<ul>
+<li>bash</li>
+<li>tar</li>
+<li>bzip2</li>
+<li>base64</li>
+<li>gcc 4.6.3</li>
+<li>lua 5.2.1 (for running the bootstrapping process)</li>
+<li>git (for pulling down dependencies)</li>
+<li>CMake (for building libgit2)</li>
+</ul><h2>Compiling</h2>
+
+<p>Currently, SPM is only supported for compilation on 32bit and 64bit architectures of GNU/Linux systems. Other systems may work out of the box, but have not been tested.<br>
+Feel free to open issues with patches if you got it working on your platform.  </p>
+
+<p>First, you must configure the system. This step can be skipped, but for your security, it is urged that you first configure the package, and then check the configuration file for any errors.<br>
+The included spm.sh is a very lightweight script that simply runs spm from the lua code in the paklib directory.
+Configuratin is very simple:</p>
+
+<pre><code>./spm.sh configure
+</code></pre>
+
+<p>Then check the configuration in build/tup.config and make sure that everything is set to values that you're okay with.<br>
+To build a lite SPM package, simply change the BUILD_TYPE configuration from 'standalone' to 'lite' and the build files will do the rest.<br>
+Then, to build the system, simply run</p>
+
+<pre><code>./spm.sh build
+</code></pre>
+
+<p>This will build the entire system and all dependencies.<br>
+If anything goes wrong, feel free to check the log in the .spm directory.  </p>
+
+<h2>Installation</h2>
+
+<p>There's no installation step. The file 'bin/spm' is really all there is required. Put it whereever you want, or just run</p>
+
+<pre><code>source scripts/spm
+</code></pre>
+
+<p>to prepend the bin directory to your PATH variable.<br>
+Note that this only works for the current terminal session. For permanent use, you should add</p>
+
+<pre><code>source [spm_clone_directory]/scripts/spm
+</code></pre>
+
+<p>To your bashrc or zshrc file.  </p>
+
+<p>Alternatively, you can use <a href="https://gist.github.com/willurd/5648907">this gist</a> to manage your PATH variable easily, without having to mess about a lot with rc files.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/mastersrp" class="avatar"><img src="https://secure.gravatar.com/avatar/8893c046d5a0df0cc0edecd7667a194c?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/mastersrp">mastersrp</a> maintains <a href="https://github.com/mastersrp/SourcePackageManager">SourcePackageManager</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/mastersrp/SourcePackageManager/tarball/master" class="tar">tar</a><a href="https://github.com/mastersrp/SourcePackageManager/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
