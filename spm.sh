@@ -1,6 +1,7 @@
 #!/bin/bash
 
-[[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=$(pwd -P)/paklib
+[[ "$SPM_ROOT" == "" ]] && export SPM_ROOT=$(pwd -P)
+[[ "$PAKLIB_ROOT" == "" ]] && export PAKLIB_ROOT=${SPM_ROOT}/paklib
 
 export LUA_PATH=${PAKLIB_ROOT}/?.lua
 install -d build/
